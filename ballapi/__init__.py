@@ -1,4 +1,6 @@
+# config
 from flask import Flask
+from flask_migrate import Migrate
 
 def create_app():
     app = Flask(__name__)
@@ -8,6 +10,7 @@ def create_app():
 
     from . import models
     models.db.init_app(app)
+    migrate = Migrate(app, models.db)
 
     @app.route('/')
     def hello():
